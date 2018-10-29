@@ -17,7 +17,9 @@ env:
 - DOCKER_IMAGE=strimr/track-metadata
 
 script:
-- export PROJECT_VERSION=$(mvn help:evaluate -Dexpression="project.version" -q -DforceStdout)
+- echo 'export PROJECT_VERSION=$(mvn help:evaluate -Dexpression="project.version" -q -DforceStdout)' > env.sh
+- source env.sh
+- echo $PROJECT_VERSION
 - docker build -t "$DOCKER_IMAGE:$PROJECT_VERSION" -t "$DOCKER_IMAGE:$TRAVIS_COMMIT" .
 
 after_success:
