@@ -10,9 +10,14 @@ kumuluzee:
   datasources:
     - jndi-name: jdbc/TrackMetadataDS
       connection-url: jdbc:postgresql://localhost:5432/track_metadata
-      username: postgres
-      password:
+      username: dbuser
+      password: postgres
       max-pool-size: 20
+  swagger:
+    spec:
+      enabled: false
+    ui:
+      enabled: false
 rest-properties:
   external-services:
     order-service:

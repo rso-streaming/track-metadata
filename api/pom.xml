@@ -11,6 +11,10 @@
 
     <artifactId>track-metadata-api</artifactId>
 
+    <properties>
+        <kumuluzee-swagger.version>1.2.0</kumuluzee-swagger.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.kumuluz.ee</groupId>
