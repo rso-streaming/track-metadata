@@ -12,14 +12,14 @@ dist: trusty
 env:
 - DOCKER_IMAGE=strimr/track-metadata
 
+before_install:
+- PROJECT_VERSION=`mvn help:evaluate -Dexpression="project.version" -q -DforceStdout`
+
 script:
-- echo "Hello World"
-- ls -ls
-- cat pom.xml
+- echo $PROJECT_VERSION
 - mvn help:evaluate -Dexpression='project.version' -q -DforceStdout
-- export PROJECT_VERSION=$(mvn help:evaluate -Dexpression='project.version' -q -DforceStdout)
 - docker build  -t "$DOCKER_IMAGE:$TRAVIS_COMMIT" . #-t "$DOCKER_IMAGE:$PROJECT_VERSION"
 
-after_success:
-- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-- docker push "$DOCKER_IMAGE"
+#after_success:
+#- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+#- docker push "$DOCKER_IMAGE"
