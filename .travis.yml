@@ -12,14 +12,11 @@ dist: trusty
 env:
 - DOCKER_IMAGE=strimr/track-metadata
 
-before_install:
-- PROJECT_VERSION=
-
 script:
-- mvn help:evaluate -Dexpression=project.version 2>/dev/null | grep -Ev "(^\[|Download)"
-- mvn help:evaluate -Dexpression=project.version -q -DforceStdout
-- docker build  -t "$DOCKER_IMAGE:$TRAVIS_COMMIT" . #-t "$DOCKER_IMAGE:$PROJECT_VERSION"
+- PROJECT_VERSION=`mvn help:evaluate -Dexpression=project.version 2>/dev/null | grep -Ev "(^\[|Download)"`
+- echo $PROJECT_VERSION
+- docker build -t "$DOCKER_IMAGE:$PROJECT_VERSION" -t "$DOCKER_IMAGE:$TRAVIS_COMMIT" .
 
-#after_success:
-#- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-#- docker push "$DOCKER_IMAGE"
+after_success:
+- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+- docker push "$DOCKER_IMAGE"
