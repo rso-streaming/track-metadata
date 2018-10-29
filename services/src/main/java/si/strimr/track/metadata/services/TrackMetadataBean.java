@@ -78,12 +78,12 @@ public class TrackMetadataBean {
 
     public boolean deleteTrackMetadata(String trackId) {
 
-        TrackMetadata customer = em.find(TrackMetadata.class, trackId);
+        TrackMetadata trackMetadata = em.find(TrackMetadata.class, trackId);
 
-        if (customer != null) {
+        if (trackMetadata != null) {
             try {
                 beginTx();
-                em.remove(customer);
+                em.remove(trackMetadata);
                 commitTx();
             } catch (Exception e) {
                 rollbackTx();

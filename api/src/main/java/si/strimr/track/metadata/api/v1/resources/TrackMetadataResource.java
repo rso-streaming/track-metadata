@@ -70,7 +70,7 @@ public class TrackMetadataResource {
 
     @PUT
     @Path("{trackId}")
-    public Response putZavarovanec(@PathParam("trackId") String trackId, TrackMetadata trackMetadata) {
+    public Response putTrackMetadata(@PathParam("trackId") String trackId, TrackMetadata trackMetadata) {
 
         trackMetadata = trackMetadataBean.putTrackMetadata(trackId, trackMetadata);
 
