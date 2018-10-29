@@ -13,11 +13,11 @@ env:
 - DOCKER_IMAGE=strimr/track-metadata
 
 before_install:
-- PROJECT_VERSION=`mvn help:evaluate -Dexpression="project.version" -q -DforceStdout`
+- PROJECT_VERSION=
 
 script:
-- echo $PROJECT_VERSION
-- mvn help:evaluate -Dexpression='project.version' -q -DforceStdout
+- mvn help:evaluate -Dexpression=project.version 2>/dev/null | grep -Ev "(^\[|Download)"
+- mvn help:evaluate -Dexpression=project.version -q -DforceStdout
 - docker build  -t "$DOCKER_IMAGE:$TRAVIS_COMMIT" . #-t "$DOCKER_IMAGE:$PROJECT_VERSION"
 
 #after_success:
