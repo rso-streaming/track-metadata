@@ -5,6 +5,7 @@ services:
     build: .
     ports:
     - 8080:8080
+    - 5005:5005
     environment:
       KUMULUZEE_DATASOURCES0_CONNECTIONURL: jdbc:postgresql://postgres:5432/track_metadata
       KUMULUZEE_DATASOURCES0_USERNAME: dbuser
