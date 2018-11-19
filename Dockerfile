@@ -26,4 +26,6 @@ WORKDIR /app
 
 EXPOSE 8080 5005
 
-CMD java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -jar track-metadata-api.jar
+# For remote debugging use following environemnt variable:
+# JAVA_TOOL_OPTIONS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=<service-name>:5005
+CMD java -jar track-metadata-api.jar

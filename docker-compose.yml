@@ -12,6 +12,7 @@ services:
       KUMULUZEE_DATASOURCES0_PASSWORD: postgres
       KUMULUZEE_CONFIG_ETCD_HOSTS: http://etcd:2379
       KUMULUZEE_DISCOVERY_ETCD_HOSTS: http://etcd:2379
+      JAVA_TOOL_OPTIONS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=track-metadata:5005
     depends_on:
     - postgres
     - etcd
