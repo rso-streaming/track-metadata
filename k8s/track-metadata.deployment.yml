@@ -13,7 +13,7 @@ spec:
         app: track-metadata
     spec:
       containers:
-        - image: strimr/track-metadata:0.9
+        - image: strimr/track-metadata:1.0.0-SNAPSHOT-26
           name: track-metadata
           env:
             - name: KUMULUZEE_DISCOVERY_ETCD_HOSTS
@@ -23,7 +23,7 @@ spec:
             - name: KUMULUZEE_SERVER_BASEURL
               value: http://35.240.79.227:8080
             - name: KUMULUZEE_DATASOURCES0_CONNECTIONURL
-              value: jdbc:postgresql://postgres:5432/track_metadata
+              value: jdbc:postgresql://track-metadata-db:5432/track_metadata
             - name: KUMULUZEE_DATASOURCES0_USERNAME
               value: dbuser
             - name: KUMULUZEE_DATASOURCES0_PASSWORD

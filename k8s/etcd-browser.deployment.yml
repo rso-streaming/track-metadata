@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: etcd-browser-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: etcd-browser
+  template:
+    metadata:
+      labels:
+        app: etcd-browser
+    spec:
+      containers:
+        - image: buddho/etcd-browser
+          name: etcd-browser
+          env:
+            - name: ETCD_HOST
+              value: etcd
+            - name: ETCD_PORT
+              value: "2379"
+            - name: SERVER_PORT
+              value: "8080"
+          ports:
+            - containerPort: 8080
+              name: server
+              protocol: TCP
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: etcd-browser
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: etcd-browser
