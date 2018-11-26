@@ -1,5 +1,5 @@
 kumuluzee:
-  name: rso-trackMetadata
+  name: rso-track-metadata
   env:
     name: dev
   version: 1.0.0
@@ -13,12 +13,21 @@ kumuluzee:
       username: dbuser
       password: postgres
       max-pool-size: 20
-  swagger:
-    spec:
-      enabled: false
-    ui:
-      enabled: false
-rest-properties:
-  external-services:
-    order-service:
+  config:
+    etcd:
+      hosts: http://etcd:2379
+  discovery:
+    etcd:
+      hosts: http://etcd:2379
+
+app-properties:
+  api:
+    filtering:
       enabled: true
+  endpoint:
+    zc: http://localhost:8090/v1/track-data
+    mm: http://localhost:8091/v1/track-metadata
+
+
+
+

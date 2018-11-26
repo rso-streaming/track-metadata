@@ -3,12 +3,14 @@ package si.strimr.track.metadata.services;
 import com.kumuluz.ee.rest.beans.QueryParameters;
 import com.kumuluz.ee.rest.utils.JPAUtils;
 import si.strimr.track.metadata.models.entities.TrackMetadata;
+import si.strimr.track.metadata.services.properties.AppProperties;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.UriInfo;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -24,7 +26,13 @@ public class TrackMetadataBean {
     @Inject
     private TrackMetadataBean trackMetadataBean;
 
+    @Inject
+    private AppProperties appProperties;
+
     public List<TrackMetadata> getTrackMetadataFilter(UriInfo uriInfo) {
+
+        if(!appProperties.isApiFilteringEnabled())
+            return Collections.emptyList();
 
         QueryParameters queryParameters = QueryParameters.query(uriInfo.getRequestUri().getQuery()).defaultOffset(0)
                 .build();
