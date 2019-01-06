@@ -19,8 +19,8 @@ services:
 
   postgres:
     image: postgres:10.5
-    ports:
-      - 5432:5432
+#    ports:
+#      - 5432:5432
     environment:
       POSTGRES_USER: dbuser
       POSTGRES_PASSWORD: postgres
@@ -28,8 +28,8 @@ services:
 
   etcd:
     image: quay.io/coreos/etcd:latest
-    ports:
-      - 2379:2379
+#    ports:
+#      - 2379:2379
     command: >-
       /usr/local/bin/etcd
       -name node1

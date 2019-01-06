@@ -32,7 +32,7 @@ public class TrackMetadataResource {
     @Path("/filtered")
     public Response getTrackMetadataFiltered() {
 
-        List<TrackMetadata> trackMetadata;
+        List<si.strimr.track.metadata.models.dtos.TrackMetadata> trackMetadata;
 
         trackMetadata = trackMetadataBean.getTrackMetadataFilter(uriInfo);
 
@@ -43,7 +43,7 @@ public class TrackMetadataResource {
     @Path("/{trackId}")
     public Response getTrackMetadata(@PathParam("trackId") Integer trackId) {
 
-        TrackMetadata trackMetadata = trackMetadataBean.getTrackMetadata(trackId);
+        si.strimr.track.metadata.models.dtos.TrackMetadata trackMetadata = trackMetadataBean.getTrackMetadata(trackId);
 
         if (trackMetadata == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -55,19 +55,21 @@ public class TrackMetadataResource {
     @POST
     public Response createTrackMetadata(TrackMetadata trackMetadata) {
 
+        si.strimr.track.metadata.models.dtos.TrackMetadata newTrackMetadata = null;
+
         if ((trackMetadata.getTrackName() == null
                 || trackMetadata.getTrackName().isEmpty())
                 || (trackMetadata.getAuthorName() == null
                 || trackMetadata.getAuthorName().isEmpty())) {
             return Response.status(Response.Status.BAD_REQUEST).build();
         } else {
-            trackMetadata = trackMetadataBean.createTrackMetadata(trackMetadata);
+            newTrackMetadata = trackMetadataBean.createTrackMetadata(trackMetadata);
         }
 
-        if (trackMetadata.getId() != null) {
-            return Response.status(Response.Status.CREATED).entity(trackMetadata).build();
+        if (newTrackMetadata.getId() != null) {
+            return Response.status(Response.Status.CREATED).entity(newTrackMetadata).build();
         } else {
-            return Response.status(Response.Status.CONFLICT).entity(trackMetadata).build();
+            return Response.status(Response.Status.CONFLICT).entity(newTrackMetadata).build();
         }
     }
 
@@ -75,13 +77,13 @@ public class TrackMetadataResource {
     @Path("{trackId}")
     public Response putTrackMetadata(@PathParam("trackId") String trackId, TrackMetadata trackMetadata) {
 
-        trackMetadata = trackMetadataBean.putTrackMetadata(trackId, trackMetadata);
+        si.strimr.track.metadata.models.dtos.TrackMetadata updatedTrackMetadata = trackMetadataBean.putTrackMetadata(trackId, trackMetadata);
 
-        if (trackMetadata == null) {
+        if (updatedTrackMetadata == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         } else {
-            if (trackMetadata.getId() != null)
-                return Response.status(Response.Status.OK).entity(trackMetadata).build();
+            if (updatedTrackMetadata.getId() != null)
+                return Response.status(Response.Status.OK).entity(updatedTrackMetadata).build();
             else
                 return Response.status(Response.Status.NOT_MODIFIED).build();
         }

@@ -18,9 +18,6 @@ public class TrackMetadata {
     @Column(name = "tags")
     private String tags;
 
-    @Column(name = "duration")
-    private Integer duration;
-
     public Integer getId() {
         return id;
     }
@@ -51,13 +48,5 @@ public class TrackMetadata {
 
     public void setTags(String tags) {
         this.tags = tags;
-    }
-
-    public Integer getDuration() {
-        return duration;
-    }
-
-    public void setDuration(Integer duration) {
-        this.duration = duration;
     }
 }

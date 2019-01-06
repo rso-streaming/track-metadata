@@ -13,6 +13,14 @@ kumuluzee:
       username: dbuser
       password: postgres
       max-pool-size: 20
+  health:
+    checks:
+      data-source-health-check:
+        jndi-name: jdbc/TrackMetadataDS
+      etcd-health-check:
+        connection-url: http://etcd:2379/health
+      http-health-check:
+        connection-url: https://api.deezer.com/options
   config:
     etcd:
       hosts: http://etcd:2379
