@@ -38,9 +38,6 @@ public class TrackMetadataBean {
 
     public List<si.strimr.track.metadata.models.dtos.TrackMetadata> getTrackMetadataFilter(UriInfo uriInfo) {
 
-        if(!appProperties.isApiFilteringEnabled())
-            return Collections.emptyList();
-
         QueryParameters queryParameters = QueryParameters.query(uriInfo.getRequestUri().getQuery())//.defaultOffset(0)
                 .build();
 

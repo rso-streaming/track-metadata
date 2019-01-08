@@ -8,36 +8,26 @@ import javax.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 @ConfigBundle("app-properties")
 public class AppProperties {
-    @ConfigValue(value = "api.filtering.enabled", watch = true)
-    private boolean apiFilteringEnabled;
 
-    @ConfigValue(value = "endpoint.zc", watch = true)
-    private String endpointZc;
+    @ConfigValue(value = "deezer.baseUrl", watch = true)
+    private String deezerBaseUrl;
 
-    @ConfigValue(value = "endpoint.mm", watch = true)
-    private String endpointMm;
+    @ConfigValue(value = "demo.healthy", watch = true)
+    private boolean demoHealthy;
 
-    public void setApiFilteringEnabled(boolean apiFilteringEnabled) {
-        this.apiFilteringEnabled = apiFilteringEnabled;
+    @ConfigValue(value = "demo.timeout", watch = true)
+    private boolean demoTimeout;
+
+    public String getDeezerBaseUrl() {
+        return deezerBaseUrl;
+    }
+    public void setDeezerBaseUrl(String deezerBaseUrl) {
+        this.deezerBaseUrl = deezerBaseUrl;
     }
 
-    public boolean isApiFilteringEnabled() {
-        return apiFilteringEnabled;
-    }
+    public boolean isDemoHealthy() { return demoHealthy; }
+    public void setDemoHealthy(boolean demoHealthy) { this.demoHealthy = demoHealthy; }
 
-    public String getEndpointZc() {
-        return endpointZc;
-    }
-
-    public void setEndpointZc(String endpointZc) {
-        this.endpointZc = endpointZc;
-    }
-
-    public String getEndpointMm() {
-        return endpointMm;
-    }
-
-    public void setEndpointMm(String endpointMm) {
-        this.endpointMm = endpointMm;
-    }
+    public boolean isDemoTimeout() { return demoTimeout; }
+    public void setDemoTimeout(boolean demoTimeout) { this.demoTimeout = demoTimeout; }
 }

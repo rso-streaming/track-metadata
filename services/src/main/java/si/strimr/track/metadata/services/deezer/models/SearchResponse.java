@@ -8,7 +8,7 @@ import java.util.Map;
 public class SearchResponse {
 
     private List<SearchResponseData> data = new ArrayList<SearchResponseData>();
-    private Integer total;
+    private Integer total = 0;
 
     public List<SearchResponseData> getData() {
         return data;

@@ -21,6 +21,30 @@ kumuluzee:
         connection-url: http://etcd:2379/health
       http-health-check:
         connection-url: https://api.deezer.com/options
+  metrics:
+    web-instrumentation:
+      - name: track-metadata-endpoint
+        url-pattern: /v1/track-metadata/*
+  logs:
+    config-file: '<?xml version="1.0" encoding="UTF-8"?>
+                    <Configuration name="track-metadata">
+                        <Appenders>
+                            <Console name="console" target="SYSTEM_OUT">
+                                <PatternLayout pattern="%d %p %marker %m %X %ex %n"/>
+                            </Console>
+                            <Socket name="logstash" host="9f616e6d-4088-44c0-bf7e-baa26c8ee70b-ls.logit.io"
+                            port="20325" protocol="tcp">
+                                <JSONLayout complete="false" compact="true" eventEol="true" charset="UTF-8" properties="true"/>
+                            </Socket>
+                        </Appenders>
+                        <Loggers>
+                            <!-- Default logger -->
+                            <Root level="all">
+                                <AppenderRef ref="console" level="info"/>
+                                <AppenderRef ref="logstash" level="info"/>
+                            </Root>
+                        </Loggers>
+                    </Configuration>'
   config:
     etcd:
       hosts: http://etcd:2379
@@ -29,12 +53,11 @@ kumuluzee:
       hosts: http://etcd:2379
 
 app-properties:
-  api:
-    filtering:
-      enabled: true
-  endpoint:
-    zc: http://localhost:8090/v1/track-data
-    mm: http://localhost:8091/v1/track-metadata
+  demo:
+    healthy: true
+    timeout: false
+  deezer:
+    base-url: https://api.deezer.com
 
 
 

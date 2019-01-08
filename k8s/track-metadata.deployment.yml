@@ -13,7 +13,7 @@ spec:
         app: track-metadata
     spec:
       containers:
-        - image: strimr/track-metadata:1.0.0-SNAPSHOT-26
+        - image: strimr/track-metadata:1.0.0-SNAPSHOT-29
           name: track-metadata
           env:
             - name: KUMULUZEE_DISCOVERY_ETCD_HOSTS
@@ -32,6 +32,12 @@ spec:
             - containerPort: 8080
               name: server
               protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: server
+            initialDelaySeconds: 20
+            periodSeconds: 3
 
 ---
 
