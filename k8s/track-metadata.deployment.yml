@@ -16,6 +16,8 @@ spec:
         - image: strimr/track-metadata:1.0.0-SNAPSHOT-29
           name: track-metadata
           env:
+            - name: KUMULUZEE_DISCOVERY_CLUSTER
+              value: gcloud
             - name: KUMULUZEE_DISCOVERY_ETCD_HOSTS
               value: http://etcd:2379
             - name: KUMULUZEE_CONFIG_ETCD_HOSTS

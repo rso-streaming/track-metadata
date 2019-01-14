@@ -38,7 +38,10 @@ kumuluzee:
                             </Socket>
                         </Appenders>
                         <Loggers>
-                            <!-- Default logger -->
+                            <Logger name="si.strimr.track.metadata.api.v1.resources.TrackMetadataResource" level="all" additivity="false">
+                                <AppenderRef ref="console"/>
+                                <AppenderRef ref="logstash"/>
+                            </Logger>
                             <Root level="all">
                                 <AppenderRef ref="console" level="info"/>
                                 <AppenderRef ref="logstash" level="info"/>

@@ -4,6 +4,7 @@ package si.strimr.track.metadata.api.v1.resources;
 //import io.swagger.annotations.ApiResponse;
 //import io.swagger.annotations.ApiResponses;
 import com.kumuluz.ee.logs.cdi.Log;
+import com.kumuluz.ee.logs.cdi.LogParams;
 import si.strimr.track.metadata.models.entities.TrackMetadata;
 import si.strimr.track.metadata.services.TrackMetadataBean;
 
@@ -17,7 +18,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.util.List;
 
-@Log
+@Log(value = LogParams.METRICS, methodCall = true)
 @ApplicationScoped
 @Path("/track-metadata")
 @Produces(MediaType.APPLICATION_JSON)
