@@ -13,6 +13,7 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.criteria.Order;
+import javax.ws.rs.InternalServerErrorException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Invocation;
@@ -50,17 +51,23 @@ public class DeezerClient {
     @CircuitBreaker(requestVolumeThreshold = 3)
     @Timeout(value = 2, unit = ChronoUnit.SECONDS)
     @Fallback(fallbackMethod = "searchTrackMetadataFallback")
-    public SearchResponse searchTrackMetadata(String artist, String track) throws Exception {
+    public SearchResponse searchTrackMetadata(String artist, String track) throws InterruptedException {
         deezerApiCallCounter.inc();
 
         if(appProperties.isDemoTimeout()) {
             TimeUnit.SECONDS.sleep(4);
         }
 
-        return httpClient
+        try {
+            return httpClient
                 .target(appProperties.getDeezerBaseUrl() + "/search")
                 .queryParam("q", String.format("artist:\"%s\" track:\"%s\"", artist, track))
                 .request().get(SearchResponse.class);
+        } catch (Exception e) {
+            log.severe(e.getMessage());
+            throw new InternalServerErrorException(e);
+        }
+
     }
 
     public SearchResponse searchTrackMetadataFallback(String artist, String track) {
